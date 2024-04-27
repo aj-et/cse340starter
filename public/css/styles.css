@@ -4,3 +4,137 @@
 *:after {
   box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+}
+
+/* Header Styles */
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#top-header a {
+  text-decoration: none;
+  color: black;
+}
+
+#tools {
+  font-size: 25px;
+}
+
+.siteName {
+  font-size: 40px;
+}
+
+/* Navigation Styles */
+.top-nav {
+  background-color: darkblue;
+  color: white;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+  padding: 10px 0 10px;
+}
+
+.nav-list li {
+  list-style-type: none;
+}
+
+/* Content (Index.ejs) Styles */
+
+.hero-img {
+  width: 100%;
+  z-index: -1;
+}
+
+.button-img {
+  width: 125px;
+  cursor: pointer;
+}
+
+.hero-pop {
+  color: skyblue;
+  -webkit-text-stroke: 1px cornflowerblue;
+  line-height: 1px;
+  position: absolute;
+  left: 15px;
+  top: 200px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.details {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.reviews ul {
+  list-style-position: inside;
+  padding-left: 2px;
+  line-height: 30px;
+}
+
+.upgrades ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  list-style-position: inside;
+  padding-left: 5px;
+  column-gap: 10px;
+  row-gap: 30px;
+  text-align: center;
+}
+
+.upgrades li {
+  width: 48%;
+}
+
+.upgrades div {
+  display: flex;
+  height: 90px;
+  background: skyblue;
+  border: 1px solid blue;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    background-image: url(/images/site/checkerboard.jpg);
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+  }
+
+  #wrapper {
+    margin: 30px 0 30px 0;
+    background-color: white;
+    width: 1500px;
+    padding: 20px;
+    border: 5px solid skyblue;
+    border-radius: 20px;
+  }
+
+  .hero-pop {
+    width: 250px;
+    left: 25%;
+    top: 40%;
+    transform: translateY(-40%);
+  }
+  
+  .details {
+    flex-direction: row;
+    margin-top: 10px;
+    justify-content: center;
+    column-gap: 10px;
+  }
+
+  .reviews ul {
+    line-height: 50px;
+  }
+}
