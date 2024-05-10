@@ -248,6 +248,10 @@ UPDATE account
 SET account_type = 'Admin'
 WHERE account_email = 'tony@starkent.com';
 
+-- Task One 5.3
+DELETE FROM account
+WHERE account_email = 'tony@starkent.com';
+
 -- Task One 5.4
 UPDATE inventory
 SET inv_description = REPLACE(inv_description, 'the small interiors', 'a huge interior')

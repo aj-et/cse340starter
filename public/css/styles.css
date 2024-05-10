@@ -32,18 +32,25 @@ body {
 /* Navigation Styles */
 .top-nav {
   background-color: darkblue;
-  color: white;
 }
 
-.nav-list {
+.top-nav ul {
   display: flex;
   justify-content: space-around;
-  font-size: 20px;
-  padding: 10px 0 10px;
+  font-size: 25px;
 }
 
-.nav-list li {
+.top-nav li, .top-nav a {
   list-style-type: none;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+
+.top-nav a:hover {
+  background-color: cornflowerblue;
+  color: darkblue;
+  padding: 10px;
 }
 
 /* Content (Index.ejs) Styles */
@@ -103,6 +110,28 @@ body {
   justify-content: center;
 }
 
+#inv-display {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75em;
+  gap: 10px;
+}
+
+#inv-display img {
+  height: 10em;
+  padding-top: 10px;
+}
+
+#inv-display li {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 300px;
+  height: 200px;
+}
+
 @media screen and (min-width: 600px) {
   body {
     background-image: url(/images/site/checkerboard.jpg);
@@ -136,5 +165,19 @@ body {
 
   .reviews ul {
     line-height: 50px;
+  }
+
+  #inv-display img {
+    height: 7em;
+  }
+
+  #inv-display {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  #inv-display li {
+    height: 400px;
+    width: 400px;
   }
 }
