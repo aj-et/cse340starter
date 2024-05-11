@@ -75,7 +75,7 @@ body {
   background: rgba(255, 255, 255, 0.7);
 }
 
-.details {
+.feature-details {
   display: flex;
   flex-direction: column-reverse;
 }
@@ -132,6 +132,46 @@ body {
   height: 200px;
 }
 
+.highlight {
+  font-weight: bold;
+}
+
+.vehicle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.vehicle-image img {
+  margin-top: 45px;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.vehicle-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.details {
+  justify-content: center;
+}
+
+@media screen and (max-width: 599px) {
+  /* This will be for the horizontal scrolling of nav bar for mobile view */
+  .top-nav ul {
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  .top-nav ul li {
+    /* display: flex; */
+    /* justify-content: center; */
+    text-align: center;
+    padding-right: 15px;
+  }
+}
+
 @media screen and (min-width: 600px) {
   body {
     background-image: url(/images/site/checkerboard.jpg);
@@ -156,7 +196,7 @@ body {
     transform: translateY(-40%);
   }
   
-  .details {
+  .feature-details {
     flex-direction: row;
     margin-top: 10px;
     justify-content: center;
@@ -179,5 +219,16 @@ body {
   #inv-display li {
     height: 400px;
     width: 400px;
+  }
+
+  .vehicle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .vehicle-details {
+    display: flex;
+    width: 60%;
   }
 }

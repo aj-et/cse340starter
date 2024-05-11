@@ -57,6 +57,34 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Inventory View Build HTML Assignment 03
+* ************************************ */
+Util.buildInventoryGrid = async function(vehicleData) {
+  if (!vehicleData || typeof vehicleData !== 'object') {
+      return '<p>No vehicle found!</p>'
+  }
+  const formattedMiles = vehicleData.inv_miles.toLocaleString();
+  const html = `
+      <div class="vehicle">
+          <div class='vehicle-image'>
+              <img src=${vehicleData.inv_image} alt=${vehicleData.inv_make}>
+          </div>
+          <div class='vehicle-details'>
+              <h3>${vehicleData.inv_make} ${vehicleData.inv_model} Details</h3>
+              <div class='details'>
+                  <h3 class='bg-gray'>Price: $${Intl.NumberFormat('en-US').format(vehicleData.inv_price)}</h3>
+                  <p class='bg-non-gray'><span class='highlight'>Description:</span> ${vehicleData.inv_description}</p>
+                  <p class='bg-gray'><span class='highlight'>Color:</span> ${vehicleData.inv_color}</p>
+                  <p class='bg-non-gray'><span class='highlight'>Miles:</span> ${formattedMiles}</p>
+              </div>
+          </div>
+      </div>
+  `
+
+  return html;
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
