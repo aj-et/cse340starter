@@ -37,6 +37,7 @@ body {
 .top-nav ul {
   display: flex;
   justify-content: space-around;
+  padding: 0;
   font-size: 25px;
 }
 
@@ -47,7 +48,7 @@ body {
   padding: 10px;
 }
 
-.top-nav a:hover {
+.top-nav li:hover {
   background-color: cornflowerblue;
   color: darkblue;
   padding: 10px;
