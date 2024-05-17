@@ -158,11 +158,31 @@ body {
   justify-content: center;
 }
 
+#messages {
+  color: red;
+  font-style: italic;
+}
+
+.form-container {
+  background-color: darkblue;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid cornflowerblue;
+  width: 500px;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+}
+
 @media screen and (max-width: 599px) {
   /* This will be for the horizontal scrolling of nav bar for mobile view */
   .top-nav ul {
     overflow: auto;
     white-space: nowrap;
+    font-size: 15px;
   }
 
   .top-nav ul li {
