@@ -46,13 +46,13 @@ validate.addNewInventoryRules = () => {
         body("classification_id")
             .trim()
             .isLength({ min: 1 })
-            .withMessage("Please select a classificaiton from the menu."),
+            .withMessage("Please select a classificaiton from the drop down menu."),
         
         // inv_make is required
         body("inv_make")
             .trim()
             .isLength({ min: 3 })
-            .withMessage("Please enter a minimum of 3 characters on make."),
+            .withMessage("Minimum of 3 characters on make."),
 
         // inv_model is required
         body("inv_model")
@@ -87,17 +87,15 @@ validate.addNewInventoryRules = () => {
         // inv_year is required
         body("inv_year")
             .trim()
-            .isLength({ min: 4, max: 4 })
             .isNumeric()
             .matches(/^(19[0-9]\d|20\d{2})$/)
-        .withMessage("Please enter a valid year between 1900 - 2099."),
+            .withMessage("Please enter a valid year between 1900 - 2099."),
 
         // inv_miles is required
         body("inv_miles")
             .trim()
-            .isLength({ min: 1 })
             .isNumeric()
-        .withMessage("Please a valid mileage."),
+            .withMessage("Please a valid mileage."),
 
         // inv_color is required
         body("inv_color")

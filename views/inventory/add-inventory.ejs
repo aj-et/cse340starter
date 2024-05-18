@@ -19,7 +19,14 @@
 <form action="/inv/add-inventory" method="post" class="form-container">
     <div class="form-fields">
         <label for="classification_id">Classification</label>
-        <%- options %>
+        <select name="classification_id">
+            <option value="" disabled <%= (!locals.classification_id) ? 'selected' : '' %>>Choose Classification</option>
+            <% options.forEach(option => { %>
+                <option value="<%= option.value %>" <%= (option.value == locals.classification_id) ? 'selected' : '' %>>
+                    <%= option.label %>
+                </option>
+            <% }) %>
+        </select>
 
         <label for="inv_make">Make</label>
         <input type="text" name="inv_make" required placeholder="Min of 3 characters" value="<%= locals.inv_make %>">
