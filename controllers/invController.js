@@ -107,11 +107,11 @@ invCont.buildAddInventory = async function (req, res, next) {
       let nav = await utilities.getNav()
   
       // fetch classification data from model
-      const options = await utilities.buildClassificationList();
+      const classificationSelect = await utilities.buildClassificationList();
       res.render("./inventory/add-inventory", {
           title: "Add New Inventory",
           nav,
-          options,
+          classificationSelect,
           errors: null,
       })
   } catch (error) {
@@ -126,29 +126,24 @@ invCont.buildAddInventory = async function (req, res, next) {
 invCont.addNewInventory = async function (req, res) {
   const { classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
 
+  let classificationSelect = await utilities.buildClassificationList()
   const addNewInventoryResult = await invModel.addNewInventory(
       classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color
   )
 
   if(addNewInventoryResult) {
-      let nav = await utilities.getNav()
       req.flash(
           "notice",
           `${inv_make} ${inv_model} has been added.`
       )
-      res.status(201).render("./inventory/management", {
-          title: "Management",
-          nav,
-          errors: null,
-      })
+      res.redirect("/inv/")
   } else {
       let nav = await utilities.getNav()
-      let options = await utilities.buildClassificationList()
       req.flash("notice", "Sorry, adding new inventory failed.")
       res.status(501).render("inventory/add-inventory", {
           title: "Add New Inventory",
           nav,
-          options,
+          classificationSelect,
           errors: null,
           classification_id,
           inv_make,
@@ -298,11 +293,11 @@ invCont.deleteInventory = async function (req, res, next) {
     inv_make, 
     inv_model
   } = req.body
+  const vehicleName = `${inv_make} ${inv_model}`
   const deleteResult = await invModel.deleteInventoryItem(inv_id)
-  const vehicleName = `${deleteResult.inv_make} ${deleteResult.inv_model}`
 
   if (deleteResult) {
-    req.flash("notice", `Vehicle data deleted.`)
+    req.flash("notice", `${vehicleName} deleted.`)
     res.redirect("/inv/")
   } else {
     const classificationSelect = await utilities.buildClassificationList(classification_id)

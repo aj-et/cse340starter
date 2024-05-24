@@ -21,7 +21,7 @@
         <label for="classification_id">Classification</label>
         <select name="classification_id">
             <option value="" disabled <%= (!locals.classification_id) ? 'selected' : '' %>>Choose Classification</option>
-            <% options.forEach(option => { %>
+            <% classificationSelect.forEach(option => { %>
                 <option value="<%= option.value %>" <%= (option.value == locals.classification_id) ? 'selected' : '' %>>
                     <%= option.label %>
                 </option>
