@@ -115,6 +115,7 @@ async function accountLogin(req, res) {
  * ********************* */
 async function buildAccountManagementView(req, res) {
   let nav = await utilities.getNav()
+  let {accountData} = res.locals.accountData
   res.render("account/account-management", {
       title: "Account Management",
       nav,
@@ -122,4 +123,13 @@ async function buildAccountManagementView(req, res) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagementView }
+/* **********************
+ *   Account Logout
+ * ********************* */
+async function logoutAccount(req, res) {
+  res.clearCookie('jwt');
+  res.locals.accountData = null;
+  return res.redirect("/");
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagementView, logoutAccount }
