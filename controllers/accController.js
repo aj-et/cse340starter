@@ -132,4 +132,105 @@ async function logoutAccount(req, res) {
   return res.redirect("/");
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagementView, logoutAccount }
+/* **********************
+ *   Account Update View
+ * ********************* */
+async function updateView (req, res) {
+  let nav = await utilities.getNav()
+  const accountId = parseInt(req.params.account_id)
+  const accountData = await accountModel.getAccountById(accountId)
+  res.render("account/account-update", {
+      title: "Edit Account Info",
+      nav,
+      errors:null,
+      account_id: accountId,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email
+  })
+}
+
+/* **********************
+ *   Update Account Info
+ * ********************* */
+async function updateInfo(req, res, next) {
+  let nav = await utilities.getNav()
+  let {accountData} = res.locals
+  let { account_id, account_firstname, account_lastname, account_email } = req.body
+  const updateResult = await accountModel.updateInfo(
+      account_firstname, account_lastname, account_email, accountData.account_id
+  )
+  if (updateResult) {
+      res.locals.accountData = await accountModel.getAccountById(accountData.account_id)
+      let accountData1 = res.locals.accountData
+      req.flash("notice", "Account updated successfully.")
+      res.status(201).render("account/account-management", {
+          title: "Account Management",
+          nav,
+          errors: null,
+          accountData1
+      })
+  } else {
+      req.flash("notice", "Sorry, the update failed. Please try again.")
+      res.status(501).render("account/account-update", {
+          title: "Update Account",
+          nav,
+          errors: null,
+          account_id, account_firstname, account_lastname, account_email
+      })
+  }
+}
+
+/* **********************
+ *   Update Account Password
+ * ********************* */
+async function updatePassword(req, res, next) {
+  let nav = await utilities.getNav()
+  let {accountData} = res.locals
+  let { account_password } = req.body
+  let hashedPassword
+  try {
+      hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+      req.flash("notice", 'Sorry, there was an error changing account info.')
+      res.status(500).render("account/update-account", {
+          title: "Update Account",
+          nav,
+          errors: null,
+      })
+  }
+  const updateResult = await accountModel.updatePassword(
+      hashedPassword, accountData.account_id
+  )
+  if (updateResult) {
+      res.locals.accountData = await accountModel.getAccountById(accountData.account_id)
+      let accountData1 = res.locals.accountData
+      req.flash("notice", "Password updated successfully.")
+      res.status(201).render("account/account-management", {
+          title: "Account Management",
+          nav,
+          errors: null,
+          accountData1
+      })
+  } else {
+      req.flash("notice", "Sorry, the update failed. Please try again.")
+      res.status(501).render("account/account-update", {
+          title: "Update Account",
+          nav,
+          errors: null,
+          account_id,
+      })
+  }
+}
+
+module.exports = { 
+  buildLogin, 
+  buildRegister, 
+  registerAccount,
+  accountLogin,
+  buildAccountManagementView,
+  logoutAccount,
+  updateView,
+  updateInfo,
+  updatePassword
+}
