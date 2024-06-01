@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const rvwModel = require("../models/review-models")
 const utilities = require("../utilities/")
 
 const invCont = {}
@@ -32,6 +33,9 @@ invCont.buildByInventoryId = async function (req, res,next) {
       }
 
       const grid = await utilities.buildInventoryGrid(vehicleData);
+      res.locals.inv_id = inv_id // for use in review insert form
+      const reviews = await rvwModel.getReviewsByInvId(inv_id)
+      const reviewDisplay = utilities.buildReviewList(reviews)
 
       let nav = await utilities.getNav();
       const title = vehicleData.inv_year + ' ' + vehicleData.inv_make + ' ' + vehicleData.inv_model;
@@ -39,6 +43,7 @@ invCont.buildByInventoryId = async function (req, res,next) {
           title: title,
           nav,
           grid,
+          reviewDisplay,
       })
 
   } catch(err) {
